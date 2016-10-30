@@ -11,13 +11,16 @@ var requestProxy = require('express-request-proxy'),
 //   }))(request, response);
 // };
 
-app.get('/github/*', function(request, response) {
-  console.log('Routing GitHub request for', request.params[0], process.env.GITHUB_TOKEN);
-  (requestProxy({
-    url: 'https://api.github.com/' + request.params[0],
-    headers: { Authorization: 'token ' + process.env.GITHUB_TOKEN}
-  }));
-});
+app.get('/github/*', requestProxy({
+  url: 'https://api.github.com/*',
+  headers: { Authorization: 'token ' + process.env.GITHUB_TOKEN}
+}));
+  // console.log('Routing GitHub request for', request.params[0], process.env.GITHUB_TOKEN);
+  // (requestProxy({
+  //   url: 'https://api.github.com/' + request.params[0],
+  //   headers: { Authorization: 'token ' + process.env.GITHUB_TOKEN}
+  // }));
+// });
 
 app.use(express.static('./'));
 
