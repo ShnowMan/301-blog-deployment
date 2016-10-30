@@ -12,10 +12,10 @@ var requestProxy = require('express-request-proxy'),
 // };
 
 app.get('/github/*', function(request, response) {
-  console.log('Routing GitHub request for', request.params[0]);
+  console.log('Routing GitHub request for', request.params[0], process.env.GITHUB_TOKEN);
   (requestProxy({
     url: 'https://api.github.com/' + request.params[0],
-    headers: { Authorization: 'token ' + process.env.GITHUB_TOKEN }
+    headers: { Authorization: 'token ' + process.env.GITHUB_TOKEN}
   }));
 });
 
